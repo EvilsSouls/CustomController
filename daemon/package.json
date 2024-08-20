@@ -2,9 +2,9 @@
   "name": "custom_controller-daemon",
   "version": "0.0.1",
   "description": "A daemon for a custom controller.",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "tsc && node index.js"
+    "test": "tsc && node src/index.js"
   },
   "keywords": [
     "VirtualController"
@@ -12,6 +12,8 @@
   "author": "EvilsSouls, Zteid7464",
   "license": "MIT",
   "devDependencies": {
+    "@tsconfig/node22": "^22.0.0",
+    "@types/node": "^22.4.1",
     "typescript": "^5.5.4"
   }
 }
