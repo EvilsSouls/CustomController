@@ -12,6 +12,5 @@ while True:
     xValue = xAxis.read_u16() // 10
     yValue = yAxis.read_u16() // 10
     button_value = button.value()
-    print(f"{str(xValue)}, {str(yValue)}, {str(button_value)}")
+    print(str({'x': {xValue}, 'y': {yValue}, 'pressed': {bool(abs(button_value-1))}}))
     utime.sleep(0.1)
-
