@@ -14,6 +14,10 @@
   "devDependencies": {
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.4.1",
+    "serialport": "^12.0.0",
     "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "kbm-robot": "^0.0.4"
   }
 }
