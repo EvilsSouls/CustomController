@@ -12,19 +12,25 @@ interface Data {
     pressed: boolean;
 }
 
-const parser = port.pipe(new ReadlineParser({ delimiter: '\t' }));
-parser.on('data', (rawData: string) => {
-    const formattedData: Data = JSON.parse(rawData);
-});
+const DAMPENING_VALUE = 0.01;
 
 robot.startJar();
 
-robot.press("alt")
-    .press("tab")
-    .sleep(100)
-    .release("tab")
-    .release("alt")
-    .sleep(100)
-    .typeString("Hello World!")
-    .go()
-    .then(robot.stopJar);
+robot.mouseMove(900, 500).go();
+let mouseX = 900;
+let mouseY = 500;
+
+const parser = port.pipe(new ReadlineParser({ delimiter: '\t' }));
+parser.on('data', (rawData: string) => {
+    const formattedData: Data = JSON.parse(rawData);
+
+    formattedData.x = formattedData.x * DAMPENING_VALUE;
+    formattedData.y = formattedData.y * DAMPENING_VALUE;
+
+    mouseX += formattedData.x;
+    mouseY += formattedData.y;
+
+    robot.mouseMove(mouseX, mouseY).go();
+});
+
+robot.stopJar();
