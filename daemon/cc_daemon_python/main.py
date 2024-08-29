@@ -1,5 +1,6 @@
 import serial
 import json
+import pyautogui
 
 ser = serial.Serial(
     port='/dev/ttyACM0',
@@ -9,6 +10,11 @@ ser = serial.Serial(
     timeout=0.5,
     inter_byte_timeout=0.1
 )
+
+MAX_VALUE = 6554
+SCREEN_SIZE = pyautogui.size()
+print(SCREEN_SIZE)
+
 
 while True:
     # Checks for more bytes in the input buffer
@@ -28,6 +34,14 @@ while True:
                 print(data)
                 json_data = json.loads(data)
                 print(json_data)
+                if int(json_data["x"]) <= 1000:
+                    pyautogui.move(1, 0, 0.01)
+                if int(json_data["x"]) >= 5000:
+                    pyautogui.move(-1, 0, 0.01)
+                if int(json_data["y"]) <= 1000:
+                    pyautogui.move(1, 1, 0.01)
+                if int(json_data["y"]) >= 5000:
+                    pyautogui.move(0, -1, 0.01)
                 print("-" * 80)
         except IndexError:
             pass
