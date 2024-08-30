@@ -23,7 +23,6 @@ while True:
     # If exists, it is added to the myBytes variable with previously read information
     if bufferBytes:
         data = ser.read(bufferBytes).decode('utf-8').strip()
-        data = data.replace("'", '"')
         print(data)
         try:
             if data[0] != "{":
@@ -35,7 +34,7 @@ while True:
                 json_data = json.loads(data)
                 print(json_data)
                 if int(json_data["x"]) <= 1000:
-                    pyautogui.move(1, 0, 0.01)
+                    pyautogui.move(1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        , 0, 0.01)
                 if int(json_data["x"]) >= 5000:
                     pyautogui.move(-1, 0, 0.01)
                 if int(json_data["y"]) <= 1000:
@@ -45,3 +44,4 @@ while True:
                 print("-" * 80)
         except IndexError:
             pass
+
